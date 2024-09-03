@@ -1,0 +1,7 @@
+{
+  "name": "movieManager",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
