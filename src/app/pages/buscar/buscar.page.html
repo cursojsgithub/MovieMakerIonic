@@ -8,9 +8,10 @@
     </ion-toolbar>
     <ion-toolbar>
       <ion-searchbar color="light" placeholder="Buscar peliculas" [(ngModel)]="peliculas"></ion-searchbar>
+      <ion-button expand="block" (click)="buscar()">Buscar</ion-button>
     </ion-toolbar>
-    <ion-button expand="block">Buscar</ion-button>
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    
+    <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
   </ion-header>
 </ion-header>
 
@@ -23,10 +24,16 @@
 
   <div id="container">
     <ion-list>
-      <ion-item *ngFor="let p of peliculasBuscadas">
-        <ion-label>Batman</ion-label>
-        <ion-button slot="end"> Agregar </ion-button>
-      </ion-item>
+      <ion-card *ngFor="let p of peliculasBuscadas" class="poster">
+        <ion-card-header>
+          <ion-card-title class="titulo">{{p.Title}}</ion-card-title>
+          <ion-card-subtitle class="año">{{p.Year}}</ion-card-subtitle>
+        </ion-card-header>
+        <img class="imagen" src={{p.Poster}} />
+        <ion-button fill="clear" class="botonañadir" (click)="guardar(p)">Añadir a colección</ion-button>
+        
+      </ion-card>
+       
     </ion-list>
   </div>
 </ion-content>
