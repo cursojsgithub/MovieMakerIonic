@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/inbox',
+    redirectTo: 'intro',
     pathMatch: 'full',
   },
   {
@@ -22,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'buscar',
     loadComponent: () => import('./pages/buscar/buscar.page').then( m => m.BuscarPage)
+  },
+  {
+    path: 'intro',
+    loadComponent: () => import('./pages/intro/intro.page').then( m => m.IntroPage)
   },
 ];
