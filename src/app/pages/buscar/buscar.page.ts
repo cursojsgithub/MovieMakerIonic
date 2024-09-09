@@ -7,6 +7,7 @@ import { Movie } from 'src/app/interfaces/movie';
 import { HttpomdbService } from 'src/app/services/httpomdb.service';
 import { MoviesManagerService } from 'src/app/services/movies-manager.service';
 
+
 @Component({
   selector: 'app-buscar',
   templateUrl: './buscar.page.html',
@@ -27,6 +28,9 @@ export class BuscarPage implements OnInit {
   ngOnInit() {
   }
 
+
+  
+  
   buscar(){
     this.cargando = true;
     this.servicio.getPeliculas(this.peliculas).subscribe( data =>{
@@ -37,10 +41,12 @@ export class BuscarPage implements OnInit {
 
   guardar(pelicula : Movie){
     try{
+      pelicula.fav=false;
       this.managerservice.addpelicula(pelicula);
       this.mensaje= "Pelicula guardada";
       this.guardado=true;
-      this.peliculasBuscadas.splice(this.peliculasBuscadas.indexOf(pelicula), 1);
+      this.peliculasBuscadas.splice(this.peliculasBuscadas.indexOf(pelicula), 1)
+      
     } catch{
       this.mensaje= "La película ya esta guardada";
       this.guardado=true;

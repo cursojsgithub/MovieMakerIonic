@@ -32,3 +32,8 @@ ion-menu-button {
   align-self: end;
   justify-self: end;
 }
+.fraccion3{
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: end;
+}

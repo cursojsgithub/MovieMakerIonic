@@ -49,7 +49,7 @@ export class MoviesManagerService {
     return this.peliculas;
   }
 
-  guardarPeliculas() {
+  public guardarPeliculas() {
     this.storage.get(NODO_RAIZ).
       then(() => {
           this.storage.set(NODO_RAIZ, this. peliculas); 
@@ -60,6 +60,14 @@ export class MoviesManagerService {
       finally(() => {
         console.log("Fin del proceso de almacenamiento");
       });
+  }
+
+  public borrarpelicula(pelicula : Movie | undefined){
+    if (pelicula!=undefined){
+      let posicionPeliculaBuscada = this.peliculas.indexOf(pelicula)
+      this.peliculas.splice(posicionPeliculaBuscada, 1)
+      this.guardarPeliculas();
+    }
   }
 
 }

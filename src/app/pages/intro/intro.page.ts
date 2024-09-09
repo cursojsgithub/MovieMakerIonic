@@ -23,7 +23,7 @@ export class IntroPage implements OnInit {
 
   constructor(private router : Router) {
     setTimeout(() => {
-      this.router.navigate(['consulta'])
+      this.router.navigate(['consulta/false'])
     }, TIEMPO_ESPERA);
    }
 

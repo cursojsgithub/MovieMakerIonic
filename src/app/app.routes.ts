@@ -16,7 +16,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/acerdade/acerdade.page').then( m => m.AcerdadePage)
   },
   {
-    path: 'consulta',
+    path: 'consulta/:fav',
     loadComponent: () => import('./pages/consulta/consulta.page').then( m => m.ConsultaPage)
   },
   {
@@ -27,4 +27,8 @@ export const routes: Routes = [
     path: 'intro',
     loadComponent: () => import('./pages/intro/intro.page').then( m => m.IntroPage)
   },
+  {
+    path: 'favoritos/:fav',
+    loadComponent: () => import('./pages/consulta/consulta.page').then( m => m.ConsultaPage)
+  }
 ];
