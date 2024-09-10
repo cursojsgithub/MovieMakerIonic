@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonProgressBar, IonInput, IonItemSliding, IonItem, IonLabel, IonItemOptions, IonItemOption, IonList, IonIcon, IonSearchbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonAlert, IonModal, IonAvatar, IonImg } from '@ionic/angular/standalone';
 import { addIcons } from "ionicons";
 import { MoviesManagerService } from 'src/app/services/movies-manager.service';
-import { archive, heart, trash, starOutline, search, star, heartOutline } from "ionicons/icons";
+import { archive, heart, trash, starOutline, search, star, heartOutline, eye } from "ionicons/icons";
 import { Movie } from 'src/app/interfaces/movie';
+import { FullMovie } from 'src/app/interfaces/full-movie';
 import { add } from 'ionicons/icons';
 import { AnimationController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { HttpomdbService } from 'src/app/services/httpomdb.service';
 
 
 @Component({
@@ -23,8 +25,11 @@ export class ConsultaPage implements OnInit {
 
   borrando : boolean = false;
   imdbIDPAraBorrar : Movie | undefined;
+
+  objetofullmovie : FullMovie | undefined;
   
   public servicio = inject(MoviesManagerService);
+  public fullservicio = inject(HttpomdbService)
   public filtroPeliculas : string = "";
   public peliculasFiltradas : Movie[];
   public animation : boolean = false;
@@ -61,7 +66,7 @@ export class ConsultaPage implements OnInit {
 
 
   constructor( private animationCtrl: AnimationController) {
-      addIcons({search,heartOutline,heart,trash}); 
+      addIcons({eye,heartOutline,heart,trash}); 
       this.peliculasFiltradas=this.servicio.getPeliculas();
     }
 
@@ -70,14 +75,7 @@ export class ConsultaPage implements OnInit {
     this.verFavoritos = this.activatedRoute.snapshot.paramMap.get('fav') as unknown as boolean;
   }
 
-  detalle(){
-    this.animation=true
-    if(this.animation == true){
-      this.enterAnimation;
-      this.leaveAnimation;
-    }
-    
-  }
+
 
   cerrar(){
     this.animation=false;
@@ -118,6 +116,12 @@ export class ConsultaPage implements OnInit {
   };
 
 
+  public detalle(imdbID:string){
+    this.fullservicio.getPelicula(imdbID).subscribe(data =>{
+      this.objetofullmovie=data;
+      console.log(this.objetofullmovie)
+    })
+  }
 
 
   buscar() {
